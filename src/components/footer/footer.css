@@ -1,0 +1,19 @@
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.footer-p {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 0%;
+    width: 100%;
+}
+
+.p-date{
+    margin-bottom: 3%;
+}
