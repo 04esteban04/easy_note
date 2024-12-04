@@ -1,0 +1,17 @@
+.container {
+    max-width: 600px;
+}
+
+form {
+    background-color: #f9f9f9;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: #74aafc;
+}
+
+a:hover {
+    color: #3c8aff;
+}

@@ -1,48 +1,52 @@
 /* Navbar Styles */
-.navbar {
+.navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 7%;
-    min-height: 30px;
-    max-height: 50px;
-    min-inline-size: 70%;
-    margin-top: 15px;
-  }
-  
-  .logo {
+    width: clamp(370px, 100%, 100%);
+    padding-top: 15px;
+    position: sticky;
+    top: 0px;
+    background-color: #0A3042;
+    color: white;
+}
+
+.logo-container{
+    display: flex;
+    width: clamp(150px, 15%, 250px); 
+    height: 100%;
+    margin-left: 15px;
+}
+
+.logo {
     width: 100%;
     height: 100%;
     margin: 0;
-  }
+}
 
-  .logo-div{
-    display: flex;
-    width: 15%;
-    min-width: 150px;
-    max-width: 250px;
-    height: 100%;
-    margin-left: 15px;
-  }
-  
-  .navbar-links {
-    list-style: none;
+.navbar-links {
     display: flex;
     gap: 1.5rem;
     padding: 0;
     margin: 0;
     margin-right: 1rem;
-    font-size: 1rem;
-  }
-  
-  .navbar-links a {
+    font-size: clamp(1rem, 1.5rem, 2rem);
+}
+
+.navbar-links a {
     text-decoration: none;
     color: white;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar-links a:hover {
+    font-size: clamp(1rem, 1.5rem, 2rem);
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.link:hover {
     color: #ffdd57;
-  }
+    fill: #ffdd57; 
+}

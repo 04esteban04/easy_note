@@ -1,13 +1,14 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Main, Login, Home, About } from './components';
+import { Main, Login, Home, Register} from './components';
 
+/* TODO: Check redirection while authenticated */
 const router = createBrowserRouter(
   [
     { path: "/", element: <Main /> },
     { path: "/login", element: <Login /> },
-    { path: "/home", element: <Home /> },
-    { path: "/about", element: <About /> },
+    { path: "/register", element: <Register /> },
+    { path: "/home", element: <Home /> }
   ],
   {
     future: {

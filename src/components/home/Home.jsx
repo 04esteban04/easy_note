@@ -1,8 +1,16 @@
+import { Footer, Navbar } from '../';
+
 function Home () {
     return (
-        <h1>
-            You are in the Home page!
-        </h1>
+        <div>
+            <Navbar logout={true}/>
+            
+            <h1>
+                You are in the Home page!
+            </h1>
+
+            <Footer />
+        </div>
     )
 }
 

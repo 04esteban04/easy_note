@@ -1,12 +1,12 @@
 import React from 'react';
-import './Main.css';
+import './main.css';
 import { Footer, Navbar } from '../';
 
 function Main() {
   return (
     <div className="main-container">
         
-        <Navbar />
+        <Navbar register={true} login={true} logout={false}/>
 
         <div className="welcome-section">
             <h1>Welcome to the Main Page!</h1>
