@@ -6,7 +6,7 @@ function Main() {
   return (
     <div className="main-container">
         
-        <Navbar register={true} login={true} logout={false}/>
+        <Navbar theme={true} register={true} login={true} logout={false}/>
 
         <div className="welcome-section">
             <h1>Welcome to the Main Page!</h1>

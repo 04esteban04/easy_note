@@ -2,9 +2,21 @@
     max-width: 600px;
 }
 
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
 form {
     background-color: #f9f9f9;
     color: black;
+}
+
+.form-size{
+    min-width: 300px;
 }
 
 a {
@@ -14,4 +26,17 @@ a {
 
 a:hover {
     color: #3c8aff;
+}
+
+.rotating {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

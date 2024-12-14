@@ -1,73 +1,133 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Footer, Navbar } from '../';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Footer, Navbar, Popup } from '../';
 import './register.css';
 
 function Register() {
 
     const navigate = useNavigate();
+    const [popupMessage, setPopupMessage] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    async function handleRegister(e) {
-        e.preventDefault();
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/checkUser`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
 
-        const username = e.target.email.value;
-        const password = e.target.password.value;
+                const data = await response.json();
 
-        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ username, password }),
-        });
+                if (data.success) {
+                    navigate('/home');
+                } 
+            } catch (error) {
+                console.error('Error while checking session:', error);
+                setPopupMessage('An error occurred while verifying your session.');
+            }
+        };
 
-        const data = await response.json();
+        checkSession();
+    }, [navigate]);
+
+    const handleRegister = async (event) => {
+        event.preventDefault();
         
-        if (data.success) {
-            alert(data.message);
-            navigate('/login'); 
-        } else {
-            alert(data.message);
+        if (isSubmitting) {
+            return;
+        } 
+
+        try {
+            setIsSubmitting(true);
+            
+            const username = event.target.email.value.trim();
+            const password = event.target.password.value.trim();
+            
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                setPopupMessage(data.message);
+                navigate('/login'); 
+            } else {
+                setPopupMessage(data.message);
+            }
+        } catch (error) {
+            console.error('Register error:', error);
+            setPopupMessage('An error occurred while creating an account. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
-    return (
-        <div>
-            <Navbar login={true}/>
+    const handlePopupClose = () => {
+        setPopupMessage(null);
+    };
 
-            <div className="container mt-5">
+    return (
+        <>
+            {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
+
+            <Navbar theme={true} register={false} login={true} logout={false} />
+
+            <div className="container my-5 register-container">
                 <h1 className="text-center mb-4">Register</h1>
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        <form className="p-4 border rounded" onSubmit={handleRegister}>
-                            <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email address</label>
-                                <input
-                                    type="email"
-                                    className="form-control"
+                <div className="row justify-content-center w-100">
+                    <div className="col-10 col-lg-12">
+                        <form className="p-4 border rounded form-size" onSubmit={handleRegister}>
+                            <div className="form-floating mb-3">
+                                <input 
+                                    type="email" 
+                                    className="form-control" 
                                     id="email"
-                                    placeholder="Enter your email"
+                                    name='email'
+                                    placeholder="name@example.com"
+                                    required
                                 />
+                                <label htmlFor="floatingInput">Enter your email address</label>
                             </div>
-                            <div className="mb-3">
-                                <label htmlFor="password" className="form-label">Password</label>
-                                <input
-                                    type="password"
-                                    className="form-control"
+
+                            <div className="form-floating mb-3">
+                                <input 
+                                    type="password" 
+                                    className="form-control" 
                                     id="password"
-                                    placeholder="Create a password"
+                                    name='password' 
+                                    placeholder="Password"
+                                    required
                                 />
+                                <label htmlFor="floatingPassword">Enter your password</label>
                             </div>
-                            <button type="submit" className="btn btn-success w-100">Register</button>
+
+                            <div className='d-grid gap-2 col-sm-8 col-lg-6 mx-auto'>
+                                <button type="submit" className="btn btn-success" disabled={isSubmitting}>
+                                    {isSubmitting ? 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-clockwise rotating" viewBox="0 0 16 16">
+                                            <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                                        </svg> 
+                                        : 'Create account'
+                                    }
+                                </button>
+                            </div>
                         </form>
-                        <p className="text-center mt-3">
-                            Already have an account? <a href="/login">Login here</a>
+
+                        <p className="text-center mt-4">
+                            Already have an account? <Link to="/login">Login here</Link>
                         </p>
                     </div>
                 </div>
             </div>
 
             <Footer />
-        </div>
+        </>
     );
 }
 
