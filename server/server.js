@@ -15,48 +15,26 @@ app.post('/auth/login', async (req, res) => {
         const response = await fetch(process.env.API_LOGIN_URL, {
             method: 'POST',
             headers: { 
-                'Content-Type': 'application/json',
-                Cookie: req.headers.cookie || '',
+                'Content-Type': 'application/json'
             },
             credentials: 'include',
             body: JSON.stringify(req.body),
         });
 
-        const cookies = response.headers.get('set-cookie');
-        if (cookies) {
-            res.setHeader('set-cookie', cookies); 
-        }
-        
         const data = await response.json();
-        res.status(response.status).json(data);
+        
+        const cookies = response.headers.get('set-cookie');
+        res.setHeader('set-cookie', cookies); 
+
+        if (data.success) {
+            res.setHeader('set-cookie', cookies);
+            res.status(200).json({ success: true, message: data.message });
+        } else {
+            res.status(response.status).json(data);
+        }
     } catch (error) {
         console.error('Login error in server:', error);
         res.status(500).json({ success: false, message: 'Internal server error (login)' });
-    }
-});
-
-app.post('/auth/logout', async (req, res) => {
-    try {
-        const response = await fetch(process.env.API_LOGOUT_URL, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                Cookie: req.headers.cookie || '',
-            },
-            credentials: 'include',
-        });
-
-
-        const cookies = response.headers.get('set-cookie');
-        if (cookies) {
-            res.setHeader('set-cookie', cookies);
-        }
-
-        const data = await response.json();
-        res.status(response.status).json(data);
-    } catch (error) {
-        console.error('Logout error in server:', error);
-        res.status(500).json({ success: false, message: 'Internal server error (logout)' });
     }
 });
 
@@ -77,18 +55,50 @@ app.post('/auth/register', async (req, res) => {
     }
 });
 
-app.get('/check-session', async (req, res) => {
+app.post('/auth/logout', async (req, res) => {
+
     try {
-        const response = await fetch(process.env.API_CHECK_SESSION, {
+        const response = await fetch(process.env.API_LOGOUT_URL, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                Cookie: req.headers.cookie || '',
+            },
+            credentials: 'include'
+        });
+        
+        const data = await response.json();
+        
+        const cookies = response.headers.get('set-cookie');
+        res.setHeader('set-cookie', cookies);  
+
+        if (data.success) {
+            res.status(200).json({ success: true, message: data.message});
+        } else {
+            res.status(response.status).json(data);
+        }
+    } catch (error) {
+        console.error('Logout error in server:', error);
+        res.status(500).json({ success: false, message: 'Internal server error (logout)' });
+    }
+});
+
+app.get('/auth/checkUser', async (req, res) => {
+    try {
+        const response = await fetch(process.env.API_CHECK_USER, {
             method: 'GET',
-            credentials: 'include',
+            headers: { 
+                'Content-Type': 'application/json',
+                Cookie: req.headers.cookie || ''
+            },
+            credentials: 'include'
         });
 
         const data = await response.json();
-        res.status(response.status).json(data);
+        res.json(data);
     } catch (error) {
-        console.error('Check session error in server:', error);
-        res.status(500).json({ success: false, message: 'Internal server error (check-session)' });
+        console.error('CheckUser error in server:', error);
+        res.status(500).json({ success: false, message: 'Internal server error (checkUser)' });
     }
 });
 
