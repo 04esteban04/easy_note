@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./navbar.css"
 
 /* TODO: Night and light mode (theme) */
@@ -37,9 +37,9 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
     }
     
     return (
-        <a 
+        <Link 
             className="link" 
-            href={path}
+            to={path}
             onClick={(e) => {
                 if (path === "#logout"){
                     handleLogout(e);
@@ -47,7 +47,7 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
             }}>
             {svg}
             <span className="d-none d-sm-inline">{text}</span>
-        </a>
+        </Link>
     )
 };
 

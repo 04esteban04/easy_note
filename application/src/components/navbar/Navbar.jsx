@@ -1,13 +1,17 @@
 import React, { useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Popup, NavbarLink } from '../';
 import "./navbar.css"
 
 function Navbar ({ theme, register, login, logout }) {
 
+    const navigate = useNavigate();
+
     const [popupMessage, setPopupMessage] = useState(null);
 
     const handlePopupClose = () => {
         setPopupMessage(null);
+        navigate('/login');
     };
 
     return (

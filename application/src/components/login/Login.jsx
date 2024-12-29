@@ -8,8 +8,9 @@ function Login() {
     const navigate = useNavigate();
     const [popupMessage, setPopupMessage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect(() => {        
         const checkSession = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/checkUser`, {
@@ -21,7 +22,9 @@ function Login() {
 
                 if (data.success) {
                     navigate('/home');
-                } 
+                } else {
+                    setLoading(false);
+                }
             } catch (error) {
                 console.error('Error while checking session:', error);
                 setPopupMessage('An error occurred while verifying your session.');
@@ -69,6 +72,10 @@ function Login() {
     const handlePopupClose = () => {
         setPopupMessage(null);
     };
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <>

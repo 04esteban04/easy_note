@@ -8,6 +8,7 @@ function Register() {
     const navigate = useNavigate();
     const [popupMessage, setPopupMessage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkSession = async () => {
@@ -21,7 +22,9 @@ function Register() {
 
                 if (data.success) {
                     navigate('/home');
-                } 
+                } else {
+                    setLoading(false);
+                }
             } catch (error) {
                 console.error('Error while checking session:', error);
                 setPopupMessage('An error occurred while verifying your session.');
@@ -71,6 +74,10 @@ function Register() {
         setPopupMessage(null);
     };
 
+    if (loading) {
+        return null;
+    }
+    
     return (
         <>
             {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
