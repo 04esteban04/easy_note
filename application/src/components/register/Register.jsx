@@ -9,9 +9,12 @@ function Register() {
     const [popupMessage, setPopupMessage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [successRegister, setSuccessRegister] = useState(false);
 
     useEffect(() => {
-        const checkSession = async () => {
+
+        async function checkSession () {
+
             try {
                 const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/checkUser`, {
                     method: 'GET',
@@ -25,16 +28,20 @@ function Register() {
                 } else {
                     setLoading(false);
                 }
-            } catch (error) {
+            } 
+            
+            catch (error) {
                 console.error('Error while checking session:', error);
                 setPopupMessage('An error occurred while verifying your session.');
             }
+
         };
 
         checkSession();
     }, [navigate]);
 
     const handleRegister = async (event) => {
+
         event.preventDefault();
         
         if (isSubmitting) {
@@ -57,21 +64,27 @@ function Register() {
             const data = await response.json();
             
             if (data.success) {
-                setPopupMessage(data.message);
-                navigate('/login'); 
-            } else {
-                setPopupMessage(data.message);
+                setSuccessRegister(true);
             }
-        } catch (error) {
+
+            setPopupMessage(data.message);
+
+        } 
+        
+        catch (error) {
             console.error('Register error:', error);
             setPopupMessage('An error occurred while creating an account. Please try again.');
-        } finally {
+        }
+        
+        finally {
             setIsSubmitting(false);
         }
     }
 
     const handlePopupClose = () => {
         setPopupMessage(null);
+        setSuccessRegister(false);
+        navigate('/login'); 
     };
 
     if (loading) {
@@ -80,13 +93,16 @@ function Register() {
     
     return (
         <>
-            {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
+            {popupMessage && <Popup successMessage={successRegister} message={popupMessage} onClose={handlePopupClose} />}
 
             <Navbar theme={true} register={false} login={true} logout={false} />
 
-            <div className="container my-5 register-container">
+            <div className="container my-5 register-container d-flex flex-column justify-content-center align-items-center">
+                
                 <h1 className="text-center mb-4">Register</h1>
+                
                 <div className="row justify-content-center w-100">
+                    
                     <div className="col-10 col-lg-12">
                         <form className="p-4 border rounded form-size" onSubmit={handleRegister}>
                             <div className="form-floating mb-3">
@@ -130,12 +146,15 @@ function Register() {
                             Already have an account? <Link to="/login">Login here</Link>
                         </p>
                     </div>
+
                 </div>
+
             </div>
 
             <Footer />
         </>
     );
+
 }
 
 export default Register;

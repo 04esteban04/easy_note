@@ -15,15 +15,15 @@ function Navbar ({ theme, register, login, logout }) {
     };
 
     return (
-        <nav className="navbar-container">
+        <nav className="navbar-container d-flex justify-content-between align-items-center">
 
             {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
 
-            <div className='logo-container'>
+            <div className='logo-container d-flex'>
                 <img className="logo" src="/assets/logo.png" alt="Logo" />
             </div>
 
-            <div className="navbar-links">
+            <div className="navbar-links d-flex justify-content-center align-items-center">
                 <NavbarLink 
                     condition={theme} 
                     path="/"

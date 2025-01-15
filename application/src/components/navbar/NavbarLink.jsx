@@ -26,10 +26,14 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
             } else {
                 setPopupMessage(data.message || 'Failed to logout');
             }
-        } catch (error) {
+            
+        } 
+        
+        catch (error) {
             console.error('Logout error:', error);
             setPopupMessage('An error occurred during logout');
         }
+
     };
 
     if (!condition) {
@@ -38,7 +42,7 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
     
     return (
         <Link 
-            className="link" 
+            className="link d-flex justify-content-center align-items-center" 
             to={path}
             onClick={(e) => {
                 if (path === "#logout"){
@@ -48,7 +52,7 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
             {svg}
             <span className="d-none d-sm-inline">{text}</span>
         </Link>
-    )
+    );
 };
 
 export default NavbarLink;

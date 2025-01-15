@@ -11,13 +11,15 @@ function Login() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {        
-        const checkSession = async () => {
+
+        async function checkSession () {
+
             try {
                 const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/checkUser`, {
                     method: 'GET',
                     credentials: 'include',
                 });
-
+                
                 const data = await response.json();
 
                 if (data.success) {
@@ -25,16 +27,20 @@ function Login() {
                 } else {
                     setLoading(false);
                 }
-            } catch (error) {
+            } 
+            
+            catch (error) {
                 console.error('Error while checking session:', error);
                 setPopupMessage('An error occurred while verifying your session.');
             }
+            
         };
 
         checkSession();
     }, [navigate]);
 
     const handleLogin = async (event) => {
+        
         event.preventDefault();
 
         if (isSubmitting) {
@@ -61,12 +67,17 @@ function Login() {
             } else {
                 setPopupMessage(data.message);
             }
-        } catch (error) {
+        } 
+        
+        catch (error) {
             console.error('Login error:', error);
             setPopupMessage('An error occurred while logging in. Please try again.');
-        } finally {
+        } 
+        
+        finally {
             setIsSubmitting(false);
         }
+
     };
 
     const handlePopupClose = () => {
@@ -83,9 +94,12 @@ function Login() {
 
             <Navbar theme={true} register={true} login={false} logout={false} />
 
-            <div className="container my-5 login-container">
+            <div className="container my-5 login-container d-flex flex-column justify-content-center align-items-center">
+                
                 <h1 className="text-center mb-4">Login</h1>
+                
                 <div className="row justify-content-center w-100">
+                    
                     <div className="col-10 col-lg-12">
                         <form className="p-4 border rounded form-size" onSubmit={handleLogin}>
                             <div className="form-floating mb-3">
@@ -129,12 +143,15 @@ function Login() {
                             Don't have an account? <Link to="/register">Create one here</Link>
                         </p>
                     </div>
+
                 </div>
+
             </div>
 
             <Footer />
         </>
     );
+
 }
 
 export default Login;

@@ -4,7 +4,7 @@ import { Footer, Navbar } from '../';
 
 function Main() {
   return (
-    <div className="main-container">
+    <div className="main-container d-flex flex-column align-items-center">
         
         <Navbar theme={true} register={true} login={true} logout={false}/>
 

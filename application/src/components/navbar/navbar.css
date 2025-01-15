@@ -1,11 +1,7 @@
-/* Navbar Styles */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 2rem;
     width: clamp(370px, 100%, 100%);
-    padding-top: 15px;
+    padding: 15px 0px;
     position: sticky;
     top: 0px;
     background-color: #0A3042;
@@ -14,7 +10,6 @@
 }
 
 .logo-container{
-    display: flex;
     width: clamp(150px, 15%, 250px); 
     height: 100%;
     margin-left: 15px;
@@ -28,9 +23,6 @@
 }
 
 .navbar-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
     padding: 0;
     margin: 0;
@@ -45,9 +37,6 @@
 }
 
 .link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 0.5rem;
 }
 
