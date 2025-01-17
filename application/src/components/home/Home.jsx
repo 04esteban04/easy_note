@@ -13,9 +13,10 @@ function Home () {
     const [popupSuccessMessage, setPopupSuccessMessage] = useState(false);
     
     const [notes, setNotes] = useState([]);
+    const [viewOption, setViewOption] = useState('view-all');
 
     const [isNewNotePopupOpen, setIsNewNotePopupOpen] = useState(false);
-    const [newNoteData, setNewNoteData] = useState({ title: '', content: '' });
+    const [newNoteData, setNewNoteData] = useState({ title: '', content: '', tags: '', color: '#FFFFFF' });
 
     const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
     const [editNoteData, setEditNoteData] = useState(null);
@@ -131,7 +132,7 @@ function Home () {
             }
         
             setIsNewNotePopupOpen(false);
-            setNewNoteData({ title: '', content: '' });
+            setNewNoteData({ title: '', content: '', tags: '', color: '#FFFFFF' });
         
         } 
         
@@ -153,7 +154,12 @@ function Home () {
 
         const noteToEdit = notes.find((note) => note.id === noteId);
         
-        setEditNoteData(noteToEdit);
+        setEditNoteData({
+            ...noteToEdit,
+            tags: noteToEdit.tags || '',
+            color: noteToEdit.color || '#FFFFFF'
+        });
+
         setIsEditPopupOpen(true);
 
     };
@@ -270,49 +276,84 @@ function Home () {
 
     };
 
-    async function handleOptionClick (optionSelected) {
+    const handleColorChange = (color) => {
+
+        if (isEditPopupOpen) {
+            setEditNoteData((prev) => ({
+                ...prev,
+                color: color,
+            }));
+        } 
+        
+        else {
+            setNewNoteData((prev) => ({
+                ...prev,
+                color: color,
+            }));
+        }
+
+    };
+    
+    const getFilteredNotes = () => {
+
+        switch (viewOption) {
+            
+            case 'view-9':
+                return notes.slice(0, 9);
+            case 'view-18':
+                return notes.slice(0, 18);
+            case 'view-27':
+                return notes.slice(0, 27);
+            case 'view-all':
+            default:
+                return notes;
+
+        }
+    };
+    
+    const handleOptionClick = (optionSelected) => {
+        
         try {
-/*             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/checkUser`, {
-                method: 'GET',
-                credentials: 'include',
-            });
-
-            const data = await response.json();
-
-            if (!data.success) {
-                setPopupMessage(data.message);
-            } else {
-                setSessionError(false); 
-            } */
 
             switch (optionSelected) {
-                case 'folder':
-                    console.log('Folder option selected');
+
+                case 'tag': {
+                    const sortedByTag = [...notes].sort((a, b) => {
+                        if (a.tags < b.tags) return -1;
+                        if (a.tags > b.tags) return 1;
+                        return 0;
+                    });
+
+                    setNotes(sortedByTag);
                     break;
-                case 'color':
-                    console.log('Color option selected');
+                }
+
+                case 'color': {
+                    const sortedByColor = [...notes].sort((a, b) => {
+                        if (a.color < b.color) return -1;
+                        if (a.color > b.color) return 1;
+                        return 0;
+                    });
+
+                    setNotes(sortedByColor);
                     break;
-                case 'view-9':
-                    console.log('View 9 option selected');
+                }
+                
+                default: {              
+                    setViewOption(optionSelected);
                     break;
-                case 'view-18':
-                    console.log('View 18 option selected');
-                    break;
-                case 'view-27':
-                    console.log('View 27 option selected');
-                    break;
-                case 'view-all':
-                    console.log('View all option selected');
-                    break;
-                default:
-                    setPopupMessage('No filter option selected.');
+                }
+
             }
 
-        } catch (error) {
+        } 
+        
+        catch (error) {
             console.error('Error while applying filter (home):', error);
             setPopupMessage(`An error occurred while selecting the option ${optionSelected}. Please try again.`);
         }
-    };
+
+    }; 
     
     if (sessionError) {
         
@@ -337,7 +378,7 @@ function Home () {
                         <Menu newNotePopupOpen={setIsNewNotePopupOpen} handleOptionClick={handleOptionClick}/>
 
                         <NotesGrid 
-                            notes={notes} 
+                            notes={getFilteredNotes()} 
                             handleEdit={handleEdit} 
                             handleDeleteConfirmation={handleDeleteConfirmation}
                         />    
@@ -359,6 +400,7 @@ function Home () {
                             newNotePopup={isNewNotePopupOpen}
                             newNoteData={newNoteData}
                             handleNewNoteChange={handleNewNoteChange}
+                            handleColorChange={handleColorChange}
                             handleNewNoteSubmit={handleNewNoteSubmit}
                             handleNewNotePopupClose={handleNewNotePopupClose}
                         />
@@ -369,6 +411,7 @@ function Home () {
                             editPopup={isEditPopupOpen} 
                             editNoteData={editNoteData}
                             handleEditChange={handleEditChange}
+                            handleColorChange={handleColorChange}
                             handleEditSubmit={handleEditSubmit}
                             handleEditPopupClose={handleEditPopupClose}
                         />

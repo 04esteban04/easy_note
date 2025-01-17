@@ -15,15 +15,23 @@
 
 #notes-grid {
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: auto;
     margin-left: 150px;
 }
 
-@media (max-width: 900px) {
-    #notes-grid{
-        grid-template-columns: repeat(2, 1fr);
-    }    
+#noNotes-grid{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 150px;
+    width: 100%;
+    height: 80vh;
+}
+
+#noNotes-p{
+    grid-column: 2/3;
+    height: 50%;
 }
 
 @media (max-width: 575px) {
@@ -58,7 +66,16 @@
     }
 
     #notes-grid {
-        grid-template-columns: repeat(1, 1fr);
         margin: 0px 20px 0px;
+    }
+
+    #noNotes-grid{
+        grid-template-columns: 1fr;
+        margin-left: 0px;
+        height: 60vh;
+    }
+
+    #noNotes-p{
+        grid-column: auto;
     }
 }   

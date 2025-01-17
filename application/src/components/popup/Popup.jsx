@@ -3,6 +3,19 @@ import './popup.css';
 
 function Popup(props) {
     
+    const noteColorSelection = [
+        '#FFFFFF',
+        '#FFB3BA',
+        '#FFDFBA',
+        '#FACD96',
+        '#FFFFBA',
+        '#BAFFC9',
+        '#CFFFB3',
+        '#BAE1FF',
+        '#E6CCFF',
+        '#D5AAFF' 
+    ];
+
     return (
         <div className="modal fade show popup-overlay">
             <div className="popup-content">
@@ -64,6 +77,41 @@ function Popup(props) {
                             />
                         </div>
 
+                        <div className="mb-3 d-flex flex-column align-items-start">
+                            <label className="form-label fw-bold fs-5">Tags</label>
+                            <input
+                                className='form-control'
+                                type="text"
+                                name="tags"
+                                placeholder="Enter tags separated by commas"
+                                value={props.newNoteData.tags}
+                                onChange={props.handleNewNoteChange}
+                            />
+                        </div>
+
+                        <div className="mb-3 d-flex flex-column align-items-start">
+                            <label className="form-label fw-bold fs-5">Color</label>
+                            <div className="d-flex flex-wrap">
+                                {noteColorSelection.map((color, index) => (
+                                    <div
+                                        key={index}
+                                        className="color-option"
+                                        style={{
+                                            backgroundColor: color,
+                                            width: '30px',
+                                            height: '30px',
+                                            borderRadius: '50%',
+                                            margin: '5px',
+                                            border: props.newNoteData.color === color ? '2px solid black' : '1px solid gray',
+                                            boxShadow: props.newNoteData.color === color ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() => props.handleColorChange(color)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
                         <div className="popup-actions">
                             <button 
                                 className='btn btn-primary mt-3 w-25 mx-auto' 
@@ -98,6 +146,41 @@ function Popup(props) {
                                 value={props.editNoteData.content} 
                                 onChange={props.handleEditChange} 
                             />
+                        </div>
+
+                        <div className="mb-3 d-flex flex-column align-items-start">
+                            <label className="form-label fw-bold fs-5">Tags</label>
+                            <input
+                                className='form-control'
+                                type="text"
+                                name="tags"
+                                placeholder="Edit tags separated by commas"
+                                value={props.editNoteData.tags}
+                                onChange={props.handleEditChange}
+                            />
+                        </div>
+
+                        <div className="mb-3 d-flex flex-column align-items-start">
+                            <label className="form-label fw-bold fs-5">Color</label>
+                            <div className="d-flex flex-wrap">
+                                {noteColorSelection.map((color, index) => (
+                                    <div
+                                        key={index}
+                                        className="color-option"
+                                        style={{
+                                            backgroundColor: color,
+                                            width: '30px',
+                                            height: '30px',
+                                            borderRadius: '50%',
+                                            margin: '5px',
+                                            border: props.editNoteData.color === color ? '2px solid black' : '1px solid gray',
+                                            boxShadow: props.editNoteData.color === color ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() => props.handleColorChange(color)}
+                                    />
+                                ))}
+                            </div>
                         </div>
 
                         <div className="popup-actions">
