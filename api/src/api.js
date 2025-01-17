@@ -10,20 +10,269 @@ const users = [
     } 
 ];
 
-const notes = [
+/* const notes = [
     {
         id: 1,
         title: "Note 1",
         content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, id doloremque! Minus dolor rerum omnis. Similique necessitatibus sit beatae alias nisi veritatis repudiandae, corporis officiis at, adipisci illo! Repellat, at?",
+        tags: "personal",
+        color: "#FFFFFF",
         updated: "2021-09-01"
     },
     {
         id: 2,
         title: "Note 2",
         content: "Content 2",
+        tags: "test1, test2",
+        color: "#FFFFFF",
         updated: "2021-09-02"
     }
+]; */
+
+const notes = [
+    {
+        id: 1,
+        title: "Grocery List",
+        content: "Milk, Eggs, Bread, Butter, Cheese",
+        tags: "personal, shopping",
+        color: "#FFB6C1",
+        updated: "2023-01-10"
+    },
+    {
+        id: 2,
+        title: "Meeting Notes",
+        content: "Discuss Q1 revenue, action items, and team goals.",
+        tags: "work, important",
+        color: "#FFD700",
+        updated: "2023-02-15"
+    },
+    {
+        id: 3,
+        title: "Workout Plan",
+        content: "Monday: Cardio, Tuesday: Weights, Wednesday: Rest",
+        tags: "health, fitness",
+        color: "#98FB98",
+        updated: "2023-03-01"
+    },
+    {
+        id: 4,
+        title: "Vacation Ideas",
+        content: "Explore Bali, visit Iceland, tour Japan.",
+        tags: "travel, leisure",
+        color: "#87CEEB",
+        updated: "2023-03-15"
+    },
+    {
+        id: 5,
+        title: "Book List",
+        content: "1984, Brave New World, The Great Gatsby.",
+        tags: "reading, wishlist",
+        color: "#FF6347",
+        updated: "2023-04-01"
+    },
+    {
+        id: 6,
+        title: "Project Milestones",
+        content: "Complete prototype, schedule user testing, finalize product.",
+        tags: "work",
+        color: "#B0E0E6",
+        updated: "2023-04-10"
+    },
+    {
+        id: 7,
+        title: "Daily To-Do",
+        content: "Check emails, attend standup, review PRs.",
+        tags: "tasks, work",
+        color: "#FFA07A",
+        updated: "2023-04-15"
+    },
+    {
+        id: 8,
+        title: "Dinner Recipes",
+        content: "Spaghetti carbonara, chicken curry, grilled salmon.",
+        tags: "food",
+        color: "#FA8072",
+        updated: "2023-05-01"
+    },
+    {
+        id: 9,
+        title: "Birthday Plans",
+        content: "Order cake, book venue, send invites.",
+        tags: "personal, events",
+        color: "#FFE4B5",
+        updated: "2023-05-15"
+    },
+    {
+        id: 10,
+        title: "Photography Tips",
+        content: "Golden hour lighting, rule of thirds, use a tripod.",
+        tags: "hobby, photography",
+        color: "#D8BFD8",
+        updated: "2023-06-01"
+    },
+    {
+        id: 11,
+        title: "Coding Notes",
+        content: "Remember to test edge cases, use descriptive variable names.",
+        tags: "programming, work",
+        color: "#FFFACD",
+        updated: "2023-06-15"
+    },
+    {
+        id: 12,
+        title: "Party Playlist",
+        content: "Top hits, 80s classics, chill vibes.",
+        tags: "music, fun",
+        color: "#E6E6FA",
+        updated: "2023-07-01"
+    },
+    {
+        id: 13,
+        title: "Packing List",
+        content: "Clothes, toiletries, phone charger, passport.",
+        tags: "travel",
+        color: "#ADD8E6",
+        updated: "2023-07-15"
+    },
+    {
+        id: 14,
+        title: "Weekend Goals",
+        content: "Finish painting, clean garage, call parents.",
+        tags: "personal, goals",
+        color: "#F08080",
+        updated: "2023-08-01"
+    },
+    {
+        id: 15,
+        title: "Budget Tracker",
+        content: "Income: $2000, Expenses: Rent, Groceries, Utilities.",
+        tags: "finance",
+        color: "#90EE90",
+        updated: "2023-08-10"
+    },
+    {
+        id: 16,
+        title: "Quotes",
+        content: "Inspiration: 'The only limit is your mind.'",
+        tags: "motivation",
+        color: "#FFF8DC",
+        updated: "2023-08-15"
+    },
+    {
+        id: 17,
+        title: "Study Plan",
+        content: "Math: 2 hours, Science: 1 hour, History: 30 minutes.",
+        tags: "education",
+        color: "#F5DEB3",
+        updated: "2023-09-01"
+    },
+    {
+        id: 18,
+        title: "Garden Schedule",
+        content: "Water plants on Mon, Wed, Fri. Fertilize monthly.",
+        tags: "hobby, gardening",
+        color: "#7FFFD4",
+        updated: "2023-09-10"
+    },
+    {
+        id: 19,
+        title: "Event Checklist",
+        content: "Book caterer, finalize guest list, choose decorations.",
+        tags: "events, planning",
+        color: "#FFDAB9",
+        updated: "2023-09-15"
+    },
+    {
+        id: 20,
+        title: "Language Practice",
+        content: "French verbs, Spanish vocabulary, German phrases.",
+        tags: "learning",
+        color: "#B0C4DE",
+        updated: "2023-10-01"
+    },
+    {
+        id: 21,
+        title: "Car Maintenance",
+        content: "Oil change, tire pressure, brake inspection.",
+        tags: "tasks, car",
+        color: "#EEE8AA",
+        updated: "2023-10-10"
+    },
+    {
+        id: 22,
+        title: "Tech Wishlist",
+        content: "Laptop, headphones, ergonomic chair.",
+        tags: "wishlist, tech",
+        color: "#8FBC8F",
+        updated: "2023-10-15"
+    },
+    {
+        id: 23,
+        title: "Volunteer Work",
+        content: "Charity event, food bank shift, park cleanup.",
+        tags: "community",
+        color: "#FFD700",
+        updated: "2023-11-01"
+    },
+    {
+        id: 24,
+        title: "Pet Care",
+        content: "Feed twice daily, walk at 7 AM and 6 PM, vet appointment.",
+        tags: "pets",
+        color: "#FFC0CB",
+        updated: "2023-11-10"
+    },
+    {
+        id: 25,
+        title: "Holiday Prep",
+        content: "Buy gifts, decorate tree, send cards.",
+        tags: "holiday",
+        color: "#FF4500",
+        updated: "2023-11-15"
+    },
+    {
+        id: 26,
+        title: "Fitness Goals",
+        content: "Run 5km, lift heavier weights, improve flexibility.",
+        tags: "health",
+        color: "#00FA9A",
+        updated: "2023-12-01"
+    },
+    {
+        id: 27,
+        title: "Travel Plans",
+        content: "Check flights, book accommodation, create itinerary.",
+        tags: "travel",
+        color: "#6495ED",
+        updated: "2023-12-10"
+    },
+    {
+        id: 28,
+        title: "Gift Ideas",
+        content: "Books, gadgets, personalized items.",
+        tags: "wishlist",
+        color: "#FF69B4",
+        updated: "2023-12-15"
+    },
+    {
+        id: 29,
+        title: "Meal Prep",
+        content: "Chicken stir fry, quinoa salad, fruit snacks.",
+        tags: "food",
+        color: "#FFD700",
+        updated: "2023-12-20"
+    },
+    {
+        id: 30,
+        title: "Reflection",
+        content: "What went well this year? What to improve next year?",
+        tags: "personal, goals",
+        color: "#708090",
+        updated: "2023-12-25"
+    }
 ];
+
+let noteIdIndex = 2;
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -123,7 +372,7 @@ app.get('/api/getNotes', (req, res) => {
 
 app.post('/api/createNote', async (req, res) => {
 
-    const { title, content } = req.body;
+    const { title, content, tags, color } = req.body;
   
     if (!title || !content) {
         return res.status(400).json({ 
@@ -133,10 +382,13 @@ app.post('/api/createNote', async (req, res) => {
     }
   
     try {
+        
         const newNote = {
-            id: notes[notes.length - 1].id + 1 ,
+            id: noteIdIndex + 1 ,
             title,
             content,
+            tags,
+            color,
             updated: formatDateToCST() 
         };
 
@@ -146,6 +398,9 @@ app.post('/api/createNote', async (req, res) => {
             success: true, 
             message: "Note created successfully.",
             noteCreated: newNote});
+
+        noteIdIndex++;
+
     } 
     
     catch (error) {
@@ -160,7 +415,7 @@ app.post('/api/createNote', async (req, res) => {
 
 app.put('/api/updateNote', (req, res) => {
     
-    const { id, title, content } = req.body;
+    const { id, title, content, tags, color } = req.body;
     
     if (!id || !title) {
         return res.status(400).json({ 
@@ -179,6 +434,8 @@ app.put('/api/updateNote', (req, res) => {
         ...notes[noteIndex],
         title,
         content,
+        tags,
+        color,
         updated: formatDateToCST() 
     };
 
