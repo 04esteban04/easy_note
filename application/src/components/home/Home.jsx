@@ -7,6 +7,9 @@ import Menu from './Menu';
 
 function Home () {
 
+    let startIndex = 0;
+    let endIndex = 0;
+
     const navigate = useNavigate();
     const [sessionError, setSessionError] = useState(true);
     const [popupMessage, setPopupMessage] = useState(null);
@@ -14,6 +17,7 @@ function Home () {
     
     const [notes, setNotes] = useState([]);
     const [viewOption, setViewOption] = useState('view-all');
+    const [page, setPage] = useState(1);
 
     const [isNewNotePopupOpen, setIsNewNotePopupOpen] = useState(false);
     const [newNoteData, setNewNoteData] = useState({ title: '', content: '', tags: '', color: '#FFFFFF' });
@@ -296,21 +300,20 @@ function Home () {
     
     const getFilteredNotes = () => {
 
-        switch (viewOption) {
-            
-            case 'view-9':
-                return notes.slice(0, 9);
-            case 'view-18':
-                return notes.slice(0, 18);
-            case 'view-27':
-                return notes.slice(0, 27);
-            case 'view-all':
-            default:
-                return notes;
+        if (viewOption !== 'view-all'){
 
-        }
-    };
+            let selectedView = parseInt(viewOption.split('-')[1], 10);
     
+            startIndex = selectedView * (page - 1);
+            endIndex = selectedView * page;
+    
+            return notes.slice(startIndex, endIndex);
+        }
+
+        return notes;
+
+    };
+
     const handleOptionClick = (optionSelected) => {
         
         try {
@@ -375,7 +378,13 @@ function Home () {
 
                     <div className="container home-container">
                     
-                        <Menu newNotePopupOpen={setIsNewNotePopupOpen} handleOptionClick={handleOptionClick}/>
+                        <Menu 
+                            newNotePopupOpen={setIsNewNotePopupOpen} 
+                            handleOptionClick={handleOptionClick} 
+                            totalNotes={notes.length} 
+                            page={page} 
+                            setPage={setPage} 
+                        />
 
                         <NotesGrid 
                             notes={getFilteredNotes()} 

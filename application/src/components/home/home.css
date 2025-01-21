@@ -1,6 +1,7 @@
 .home-container{
     max-width: 1800px;
     width: 100%;
+    min-height: 80vh;
 }
 
 #menu {
@@ -53,29 +54,37 @@
         display: none;
     }
 
-    #menu-options button {
+    .option-button {
         width: 125px;
     }
 
-    #menu-options div {
-        width: 125px;
+    .page-selector {
+        width: 45px;
     }
 
-    #view-dropdown{
+    #page-number {
+        width: fit-content;
+    }
+
+    #view-dropdown {
         margin-bottom: 0px;
     }
 
+    #view-dropdown-container {
+        width: 170px;
+    }
+    
     #notes-grid {
         margin: 0px 20px 0px;
     }
 
-    #noNotes-grid{
+    #noNotes-grid {
         grid-template-columns: 1fr;
         margin-left: 0px;
         height: 60vh;
     }
 
-    #noNotes-p{
+    #noNotes-p {
         grid-column: auto;
     }
 }   
