@@ -64,6 +64,7 @@ function Home () {
         async function fetchNotes() {
 
             try {
+
                 const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/getNotes`, {
                     method: 'GET',
                     credentials: 'include',
@@ -73,9 +74,8 @@ function Home () {
                 
                 if (data.success) {
                     setNotes(data.userNotes);
-                } else {
-                    setPopupMessage(data.message || 'Failed to fetch notes.');
-                }
+                } 
+
             } 
             
             catch (error) {
@@ -155,9 +155,9 @@ function Home () {
     };
 
     const handleEdit = (noteId) => {
-
-        const noteToEdit = notes.find((note) => note.id === noteId);
         
+        const noteToEdit = notes.find((note) => note.note_id === noteId);
+
         setEditNoteData({
             ...noteToEdit,
             tags: noteToEdit.tags || '',
@@ -242,14 +242,14 @@ function Home () {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify({ id: noteToDelete.id }),
+                body: JSON.stringify({ note_id: noteToDelete.note_id }),
             });
 
             const data = await response.json();
 
             if (data.success) {
                 
-                setNotes((prevNotes) => prevNotes.filter((note) => note.id !== noteToDelete.id));
+                setNotes((prevNotes) => prevNotes.filter((note) => note.note_id !== noteToDelete.note_id));
                 setPopupMessage(data.message || 'Note deleted successfully!');
                 setPopupSuccessMessage(true);
 
@@ -339,6 +339,17 @@ function Home () {
                     });
 
                     setNotes(sortedByColor);
+                    break;
+                }
+
+                case 'reset': {
+                    const sortedById = [...notes].sort((a, b) => {
+                        if (a.note_id < b.note_id) return -1;
+                        if (a.note_id > b.note_id) return 1;
+                        return 0;
+                    });
+
+                    setNotes(sortedById);
                     break;
                 }
                 

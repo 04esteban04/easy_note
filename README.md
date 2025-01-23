@@ -5,8 +5,6 @@ EasyNote offers a clean and intuitive UI, making it simple for users to create, 
 
 # To Do
 
-- Create functionality to view notes using pages
-- Create and connect database to store data
 - Add content to main page
-- Change login icon in main page while in session
 - Dark / light mode (theme)
+- Add more description to readme

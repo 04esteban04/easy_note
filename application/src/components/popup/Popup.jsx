@@ -5,20 +5,33 @@ function Popup(props) {
     
     const noteColorSelection = [
         '#FFFFFF',
-        '#FFB3BA',
-        '#FFDFBA',
+        '#94A6B8',
+        '#FF5744',
+        '#FA8072',
+        '#FFA07A',
         '#FACD96',
-        '#FFFFBA',
-        '#BAFFC9',
-        '#CFFFB3',
+        '#FFE346',
+        '#FFFF8F',
+        '#8FBC8F',
+        '#5BFF5B',
+        '#98FB98',
+        '#53C1EC',
         '#BAE1FF',
+        '#C58EFC',
         '#E6CCFF',
-        '#D5AAFF' 
+        '#FFB3BA'
     ];
+
+    const backgroundColor =
+        props.newNotePopup
+            ? props.newNoteData.color
+            : props.editPopup
+            ? props.editNoteData.color
+            : '#FFFFFF'; 
 
     return (
         <div className="modal fade show popup-overlay">
-            <div className="popup-content">
+            <div className="popup-content" style={{ backgroundColor: backgroundColor }}>
                 
                 {props.message && (
                     <>
@@ -62,6 +75,7 @@ function Popup(props) {
                                 className='form-control' 
                                 type="text" 
                                 name="title" 
+                                placeholder="Enter note title"
                                 value={props.newNoteData.title} 
                                 onChange={props.handleNewNoteChange} 
                             />
@@ -72,6 +86,7 @@ function Popup(props) {
                             <textarea 
                                 className='form-control popup-size' 
                                 name="content" 
+                                placeholder="Enter note content"
                                 value={props.newNoteData.content} 
                                 onChange={props.handleNewNoteChange} 
                             />
@@ -90,26 +105,22 @@ function Popup(props) {
                         </div>
 
                         <div className="mb-3 d-flex flex-column align-items-start">
+                            
                             <label className="form-label fw-bold fs-5">Color</label>
-                            <div className="d-flex flex-wrap">
+                            
+                            <div className="color-container form-control d-flex flex-wrap">
+                                
                                 {noteColorSelection.map((color, index) => (
                                     <div
                                         key={index}
-                                        className="color-option"
-                                        style={{
-                                            backgroundColor: color,
-                                            width: '30px',
-                                            height: '30px',
-                                            borderRadius: '50%',
-                                            margin: '5px',
-                                            border: props.newNoteData.color === color ? '2px solid black' : '1px solid gray',
-                                            boxShadow: props.newNoteData.color === color ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none',
-                                            cursor: 'pointer',
-                                        }}
+                                        className={`color-option ${props.newNoteData.color === color ? 'selected' : ''}`}
+                                        style={{ backgroundColor: color}}
                                         onClick={() => props.handleColorChange(color)}
                                     />
                                 ))}
+
                             </div>
+
                         </div>
 
                         <div className="popup-actions">
@@ -161,26 +172,22 @@ function Popup(props) {
                         </div>
 
                         <div className="mb-3 d-flex flex-column align-items-start">
+                            
                             <label className="form-label fw-bold fs-5">Color</label>
-                            <div className="d-flex flex-wrap">
+                            
+                            <div className="color-container form-control d-flex flex-wrap">
+                                
                                 {noteColorSelection.map((color, index) => (
                                     <div
                                         key={index}
-                                        className="color-option"
-                                        style={{
-                                            backgroundColor: color,
-                                            width: '30px',
-                                            height: '30px',
-                                            borderRadius: '50%',
-                                            margin: '5px',
-                                            border: props.editNoteData.color === color ? '2px solid black' : '1px solid gray',
-                                            boxShadow: props.editNoteData.color === color ? '0 0 10px rgba(0, 0, 0, 0.5)' : 'none',
-                                            cursor: 'pointer',
-                                        }}
+                                        className={`color-option ${props.editNoteData.color === color ? 'selected' : ''}`}
+                                        style={{ backgroundColor: color}}
                                         onClick={() => props.handleColorChange(color)}
                                     />
                                 ))}
+
                             </div>
+
                         </div>
 
                         <div className="popup-actions">

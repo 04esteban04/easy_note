@@ -11,13 +11,13 @@ function NotesGrid ({notes, handleEdit, handleDeleteConfirmation}) {
                     <div id="notes-grid" className='gap-2 p-0 mt-sm-3 me-sm-1 mb-sm-2 w-100'>
                         {notes.map((note) => (
                             <Note
-                                key={note.id}
+                                key={note.note_id}
                                 title={note.title}
                                 content={note.content}
                                 tags={note.tags}
                                 color={note.color}
                                 updated={note.updated}
-                                onEdit={() => handleEdit(note.id)}
+                                onEdit={() => handleEdit(note.note_id)}
                                 onDelete={() => handleDeleteConfirmation(note)}
                             />
                         ))}

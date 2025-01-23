@@ -37,7 +37,6 @@
 
 @media (max-width: 575px) {
     #menu {
-        justify-content: center;
         position: static;
         border-radius: 0%;
         max-width: 100%;
@@ -45,7 +44,6 @@
     }
 
     #menu-options {
-        gap: 1%;
         max-width: 100%;
         width: 100%;
     }
@@ -55,7 +53,7 @@
     }
 
     .option-button {
-        width: 125px;
+        width: 80px;
     }
 
     .page-selector {
