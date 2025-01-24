@@ -96,7 +96,7 @@ function Login() {
                 
                 {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
 
-                <Navbar themeCondition={true} register={true} login={false} logout={false} />
+                <Navbar themeCondition={true} register={true}/>
 
                 <div className="login-container d-flex justify-content-center align-items-center">
                             

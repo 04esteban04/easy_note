@@ -99,7 +99,7 @@ function Register() {
 
                 {popupMessage && <Popup successMessage={successRegister} message={popupMessage} onClose={handlePopupClose} />}
 
-                <Navbar themeCondition={true} register={false} login={true} logout={false} />
+                <Navbar themeCondition={true} login={true}/>
 
                 <div className="register-container d-flex justify-content-center align-items-center">
 

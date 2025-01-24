@@ -20,6 +20,8 @@ function NavbarLink ({ condition, path, svg, text, toggleTheme, setPopupMessage 
             const data = await response.json();
 
             if (data.success) {
+                localStorage.removeItem("savedView");
+                localStorage.removeItem("savedPage");
                 navigate('/login');
             } else {
                 setPopupMessage(data.message || 'Failed to logout');

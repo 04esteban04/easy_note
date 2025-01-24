@@ -387,7 +387,7 @@ function Home () {
                 
                 <div className="main-home-container">
 
-                    <Navbar themeCondition={true} register={false} login={false} logout={true} />
+                    <Navbar themeCondition={true} logout={true} />
 
                     <div className="container home-container">
                     
@@ -397,6 +397,8 @@ function Home () {
                             totalNotes={notes.length} 
                             page={page} 
                             setPage={setPage} 
+                            viewOption={viewOption}
+                            setViewOption={setViewOption}
                         />
 
                         <NotesGrid 
