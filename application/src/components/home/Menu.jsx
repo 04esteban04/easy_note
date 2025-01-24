@@ -36,7 +36,7 @@ function Menu ({newNotePopupOpen, handleOptionClick, totalNotes, page, setPage})
     };
 
     return (
-        <aside id="menu" className='d-flex flex-column justify-content-center align-items-center align-items-sm-start w-100 mt-1 mt-sm-3 mb-3'>
+        <aside id="menu" className='d-flex flex-column justify-content-center align-items-center align-items-sm-start w-100 mt-3 mb-3'>
 
         
             <h3 className='d-flex justify-content-center justify-content-sm-start w-100'>
@@ -49,24 +49,28 @@ function Menu ({newNotePopupOpen, handleOptionClick, totalNotes, page, setPage})
                 <hr className="w-100 my-2" />
                 
                 <button type='button' onClick={() => newNotePopupOpen(true)} 
-                        className="option-button text-light text-decoration-none bg-transparent border-0 my-sm-2 ms-sm-2">
+                        className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 ms-sm-2
+                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
                     Create note
                 </button>
 
                 <hr id='middle-hr' className="w-100 my-2" />
 
                 <button type='button' onClick={() => handleOptionClick('tag')} 
-                        className="option-button text-light text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2">
+                        className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
+                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
                     Order by tag
                 </button>
             
                 <button type='button' onClick={() => handleOptionClick('color')} 
-                        className="option-button text-light text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2">   
+                        className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
+                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
                     Order by color
                 </button>
 
                 <button type='button' onClick={() => handleOptionClick('reset')} 
-                        className="option-button text-light text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2">   
+                        className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
+                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
                     Reset order
                 </button>
 
@@ -77,7 +81,8 @@ function Menu ({newNotePopupOpen, handleOptionClick, totalNotes, page, setPage})
                     <div className="my-2">
 
                         <button 
-                            className="page-selector text-light text-decoration-none bg-transparent border-0 cursor-pointer m-0" 
+                            className={`page-selector text-decoration-none bg-transparent border-0 cursor-pointer m-0
+                                ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`} 
                             type='button'
                             onClick={() => handlePageChange(page - 1)} 
                             disabled={page === 1}
@@ -98,10 +103,15 @@ function Menu ({newNotePopupOpen, handleOptionClick, totalNotes, page, setPage})
 
                         </button>
                         
-                        <span id="page-number">{`Page ${page} of ${calculateTotalPages()}`}</span>
+                        <span id="page-number" 
+                            className={`${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
+                        >
+                            {`Page ${page} of ${calculateTotalPages()}`}
+                        </span>
 
                         <button 
-                            className="page-selector text-light text-decoration-none bg-transparent border-0" 
+                            className={`page-selector text-decoration-none bg-transparent border-0
+                                ${(localStorage.getItem("theme") === "ligh" ? "menu-light-mode" : "menu-dark-mode")}`} 
                             type='button'
                             onClick={() => handlePageChange(page + 1)} 
                             disabled={page === calculateTotalPages()}
@@ -126,10 +136,18 @@ function Menu ({newNotePopupOpen, handleOptionClick, totalNotes, page, setPage})
 
                     <div id='view-dropdown-container' className='d-flex justify-content-center mt-sm-2 mb-sm-1'>
                         
-                        <label htmlFor="view-dropdown" className="text-light text-decoration-none">View</label>
+                        <label htmlFor="view-dropdown" 
+                            className={`text-decoration-none 
+                                ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
+                        >
+                            View
+                        </label>
                         
                         <select id="view-dropdown" 
-                                className="form-select-m bg-dark text-light border-0 ms-2"
+                                className={`form-select-m border-1 ms-2 rounded 
+                                    ${(localStorage.getItem("theme") === "light" ? 
+                                    "menu-light-mode bg-tranparent" : 
+                                    "menu-dark-mode bg-dark")}`}
                                 value={selectedView} 
                                 onChange={handleViewChange}
                         >

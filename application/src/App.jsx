@@ -2,7 +2,6 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Main, Login, Home, Register} from './components';
 
-/* TODO: Check redirection while authenticated */
 const router = createBrowserRouter(
   [
     { path: "/", element: <Main /> },

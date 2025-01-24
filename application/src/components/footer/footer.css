@@ -1,0 +1,5 @@
+.footer-container {
+    background-color: #0A3042;
+    color: white; 
+    width: clamp(370px, 100%, 100%);
+}

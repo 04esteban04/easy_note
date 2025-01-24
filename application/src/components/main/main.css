@@ -1,4 +1,4 @@
-body, html {
+body {
     margin: 0;
     padding: 0;
     background-color: #0A3042;
@@ -10,7 +10,19 @@ body, html {
     font-style: normal;
 }
 
+body.light-mode {
+    background-color: #ffffff;
+    color: #0A3042;
+}
+
+body.dark-mode {
+    background-color: #0A3042;
+    color: white;
+}
+
 .main-container {
+    max-width: 1900px;
+    width: 100%;
     height: 100vh;
 }
 

@@ -6,5 +6,5 @@ EasyNote offers a clean and intuitive UI, making it simple for users to create, 
 # To Do
 
 - Add content to main page
-- Dark / light mode (theme)
+- Redesign grid in home page
 - Add more description to readme

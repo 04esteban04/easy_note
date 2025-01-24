@@ -382,10 +382,12 @@ function Home () {
     else {    
 
         return (
+
             <div className='d-flex justify-content-center align-items-center'>
-                <div className="home-container">
-                    
-                    <Navbar theme={true} register={false} login={false} logout={true} />
+                
+                <div className="main-home-container">
+
+                    <Navbar themeCondition={true} register={false} login={false} logout={true} />
 
                     <div className="container home-container">
                     
@@ -445,8 +447,9 @@ function Home () {
                             handleDeletePopupClose={handleDeletePopupClose}
                         />
                     )}
-                    
+
                 </div>
+
             </div>
         );
 

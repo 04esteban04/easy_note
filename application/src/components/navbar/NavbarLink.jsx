@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./navbar.css"
 
-/* TODO: Night and light mode (theme) */
-
-function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
+function NavbarLink ({ condition, path, svg, text, toggleTheme, setPopupMessage }) {
 
     const navigate = useNavigate();
 
@@ -47,6 +45,8 @@ function NavbarLink ({ condition, path, svg, text, setPopupMessage }) {
             onClick={(e) => {
                 if (path === "#logout"){
                     handleLogout(e);
+                } else if (path === "#theme"){
+                    toggleTheme();
                 }
             }}>
             {svg}

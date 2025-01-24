@@ -8,7 +8,7 @@ function NotesGrid ({notes, handleEdit, handleDeleteConfirmation}) {
                 
                 {notes.length > 0 ? (
                     
-                    <div id="notes-grid" className='gap-2 p-0 mt-sm-3 me-sm-1 mb-sm-2 w-100'>
+                    <div id="notes-grid" className='gap-2 p-0 mt-sm-3 me-sm-1 mb-4 w-100'>
                         {notes.map((note) => (
                             <Note
                                 key={note.note_id}
@@ -25,7 +25,7 @@ function NotesGrid ({notes, handleEdit, handleDeleteConfirmation}) {
 
                     ) : (
                         <div id='noNotes-grid'>
-                            <p id='noNotes-p' className="text-light d-flex justify-content-center align-items-center">
+                            <p id='noNotes-p' className="d-flex justify-content-center align-items-center">
                                 No notes available!
                             </p>
                         </div>

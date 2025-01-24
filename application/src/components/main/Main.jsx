@@ -40,16 +40,21 @@ function Main() {
     });
 
     return (
-        <div className="main-container d-flex flex-column align-items-center">
-            
-            <Navbar sessionActive={isSessionActive} theme={true} register={true} login={true} logout={false}/>
 
-            <div className="welcome-section">
-                <h1>Welcome to the Main Page!</h1>
-                <p>This is the main content that the users sees when entering the app.</p>
+        <div className='d-flex justify-content-center align-items-center'>
+
+            <div className="main-container d-flex flex-column align-items-center">
+                
+                <Navbar sessionActive={isSessionActive} themeCondition={true} register={true} login={true} logout={false}/>
+
+                <div className="welcome-section">
+                    <h1>Welcome to the Main Page!</h1>
+                    <p>This is the main content that the users sees when entering the app.</p>
+                </div>
+
+                <Footer />
+
             </div>
-
-            <Footer />
 
         </div>
     );
