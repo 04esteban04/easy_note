@@ -9,6 +9,7 @@ function Login() {
     const [popupMessage, setPopupMessage] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState('dark');
 
     useEffect(() => {        
 
@@ -38,6 +39,13 @@ function Login() {
 
         checkSession();
     }, [navigate]);
+
+    useEffect(() => {
+
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
+
+    }, []);
 
     const handleLogin = async (event) => {
         
@@ -96,12 +104,12 @@ function Login() {
                 
                 {popupMessage && <Popup message={popupMessage} onClose={handlePopupClose} />}
 
-                <Navbar themeCondition={true} register={true}/>
+                <Navbar themeCondition={true} setTheme={setTheme} register={true}/>
 
                 <div className="login-container d-flex justify-content-center align-items-center">
                             
                     <form className={`login-form-container p-4
-                        ${(localStorage.getItem("theme") === "light" ? "light-mode-container" : "dark-mode-container")}`}
+                        ${(theme === "light" ? "light-mode-container" : "dark-mode-container")}`}
                         onSubmit={handleLogin}>
                         
                         <h1 className="text-center mb-5">Login</h1>

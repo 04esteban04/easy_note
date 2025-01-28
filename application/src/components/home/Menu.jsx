@@ -2,22 +2,24 @@ import React, { useEffect } from 'react';
 
 function Menu (props) {
 
+    const { setViewOption, setPage } = props; 
+
     useEffect(() => {
 
         const savedView = localStorage.getItem("savedView") || "view-all";
-        props.setViewOption(savedView);
+        setViewOption(savedView);
 
         const savedPage = parseInt(localStorage.getItem("savedPage"), 10) || 1;
-        props.setPage(savedPage);
+        setPage(savedPage);
 
-    }, [props.setViewOption, props.setPage]);
+    }, [setViewOption, setPage]);
 
     const handleViewChange = (e) => {
 
         const selectedValue = e.target.value;
 
-        props.setViewOption(selectedValue);
-        props.setPage(1);
+        setViewOption(selectedValue);
+        setPage(1);
 
         localStorage.setItem("savedView", selectedValue); 
         localStorage.setItem("savedPage", 1); 
@@ -42,7 +44,7 @@ function Menu (props) {
         let getTotalPages = calculateTotalPages();
         
         if (page >= 1 && page <= getTotalPages) {
-            props.setPage(page);
+            setPage(page);
             localStorage.setItem("savedPage", page); 
         }
 
@@ -63,7 +65,7 @@ function Menu (props) {
                 
                 <button type='button' onClick={() => props.newNotePopupOpen(true)} 
                         className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 ms-sm-2
-                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
+                            ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
                     Create note
                 </button>
 
@@ -71,19 +73,19 @@ function Menu (props) {
 
                 <button type='button' onClick={() => props.handleOptionClick('tag')} 
                         className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
-                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
+                            ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>
                     Order by tag
                 </button>
             
                 <button type='button' onClick={() => props.handleOptionClick('color')} 
                         className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
-                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
+                            ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
                     Order by color
                 </button>
 
                 <button type='button' onClick={() => props.handleOptionClick('reset')} 
                         className={`option-button text-decoration-none bg-transparent border-0 my-sm-2 mb-sm-2 ms-sm-2 
-                            ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
+                            ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}>   
                     Reset order
                 </button>
 
@@ -95,7 +97,7 @@ function Menu (props) {
 
                         <button 
                             className={`page-selector text-decoration-none bg-transparent border-0
-                                ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`} 
+                                ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`} 
                             type='button'
                             onClick={() => handlePageChange(props.page - 1)} 
                             disabled={props.page === 1}
@@ -118,14 +120,14 @@ function Menu (props) {
                         </button>
                         
                         <span id="page-number" 
-                            className={`${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
+                            className={`${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
                         >
                             {`Page ${props.page} of ${calculateTotalPages()}`}
                         </span>
 
                         <button 
                             className={`page-selector text-decoration-none bg-transparent border-0
-                                ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`} 
+                                ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`} 
                             type='button'
                             onClick={() => handlePageChange(props.page + 1)} 
                             disabled={props.page === calculateTotalPages()}
@@ -153,14 +155,14 @@ function Menu (props) {
                         
                         <label htmlFor="view-dropdown" 
                             className={`text-decoration-none 
-                                ${(localStorage.getItem("theme") === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
+                                ${(props.theme === "light" ? "menu-light-mode" : "menu-dark-mode")}`}
                         >
                             View
                         </label>
                         
                         <select id="view-dropdown" 
                                 className={`form-select-m border-1 ms-2 rounded 
-                                    ${(localStorage.getItem("theme") === "light" ? 
+                                    ${(props.theme === "light" ? 
                                     "menu-light-mode bg-tranparent" : 
                                     "menu-dark-mode bg-dark")}`}
                                 value={props.viewOption} 

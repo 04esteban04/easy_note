@@ -10,6 +10,7 @@ function Register() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [loading, setLoading] = useState(true);
     const [successRegister, setSuccessRegister] = useState(false);
+    const [theme, setTheme] = useState('dark');
 
     useEffect(() => {
 
@@ -39,6 +40,13 @@ function Register() {
 
         checkSession();
     }, [navigate]);
+
+    useEffect(() => {
+
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
+
+    }, []);
 
     const handleRegister = async (event) => {
 
@@ -99,12 +107,12 @@ function Register() {
 
                 {popupMessage && <Popup successMessage={successRegister} message={popupMessage} onClose={handlePopupClose} />}
 
-                <Navbar themeCondition={true} login={true}/>
+                <Navbar themeCondition={true} setTheme={setTheme} login={true}/>
 
                 <div className="register-container d-flex justify-content-center align-items-center">
 
                     <form className={`register-form-container p-4
-                        ${(localStorage.getItem("theme") === "light" ? "light-mode-container" : "dark-mode-container")}`}
+                        ${(theme === "light" ? "light-mode-container" : "dark-mode-container")}`}
                         onSubmit={handleRegister}>
                         
                         <h1 className="text-center mb-5">Register</h1>

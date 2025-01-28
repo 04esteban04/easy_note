@@ -14,6 +14,7 @@ function Home () {
     const [sessionError, setSessionError] = useState(true);
     const [popupMessage, setPopupMessage] = useState(null);
     const [popupSuccessMessage, setPopupSuccessMessage] = useState(false);
+    const [theme, setTheme] = useState('dark');
     
     const [notes, setNotes] = useState([]);
     const [viewOption, setViewOption] = useState('view-all');
@@ -89,6 +90,13 @@ function Home () {
         }
 
     }, [sessionError]);
+
+    useEffect(() => {
+
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
+
+    }, []);
 
     const handlePopupClose = () => {
         
@@ -387,7 +395,7 @@ function Home () {
                 
                 <div className="main-home-container">
 
-                    <Navbar themeCondition={true} logout={true} />
+                    <Navbar themeCondition={true} setTheme={setTheme} logout={true} />
 
                     <div className="container home-container">
                     
@@ -399,6 +407,7 @@ function Home () {
                             setPage={setPage} 
                             viewOption={viewOption}
                             setViewOption={setViewOption}
+                            theme={theme}
                         />
 
                         <NotesGrid 

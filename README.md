@@ -5,6 +5,8 @@ EasyNote offers a clean and intuitive UI, making it simple for users to create, 
 
 # To Do
 
-- Add content to main page
+- Add app description to readme
+- Add app tutorial in ``Learn more`` button in main page
+- Create functionality to add reminders
+- Create functionality to add tasks
 - Redesign grid in home page
-- Add more description to readme
