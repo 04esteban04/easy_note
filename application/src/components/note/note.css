@@ -1,0 +1,23 @@
+.card{
+    height: fit-content;
+    min-width: 150px;
+    max-width: 100%;
+    border-radius: 20px;
+    background-color: var(--note-color);
+}
+
+.card-content {
+    text-align: justify;
+    height: fit-content; 
+    box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    border-radius: 10px;
+}
+
+.card-footer{
+    padding: 6px 2px;
+}
+
+.badge {
+    font-size: 0.8rem;
+}
