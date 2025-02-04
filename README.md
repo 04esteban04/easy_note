@@ -52,7 +52,7 @@ After a successful authentication, the user will be redirected to the home page 
 
 The user can click the option `Create note` from the menu on the sidebar to create a new note. When doing so, a title and content for the note are required. Also, if the user selects a color it will automatically change the popup background color to preview it.
 
-![Create note](./application/public/assets/gif/create-note.gif)
+![Create note](./application/public/assets/create-note.png)
 
 
 #### **Edit note**
@@ -64,7 +64,7 @@ The user can click the option
 </svg> 
 from the note itself to edit the note. When doing so, as same as before a title and content for the note are required and if the user selects a color it will automatically change the popup background color to preview it.
 
-![Edit note](./application/public/assets/gif/edit-note.gif)
+![Edit note](./application/public/assets/edit-note.png)
 
 
 #### **Delete note**
@@ -76,28 +76,28 @@ The user can click the option
 </svg>
 from the note itself to delete the note. When doing so, a confirmation popup will open asking the user to confirm the note deletion. If the user confirms then the note will be deleted and it will no longer appears.
 
-![Delete note](./application/public/assets/gif/delete-note.gif)
+![Delete note](./application/public/assets/delete-note.png)
 
 
 #### **Order by tags**
 
 The user can click the option `Order by tags` from the menu on the sidebar to order the notes by tags alphabetically.
 
-![Order by tags](./application/public/assets/gif/order-tags.gif)
+![Order by tags](./application/public/assets/order-tags.png)
 
 
 #### **Order by color**
 
 The user can click the option `Order by color` from the menu on the sidebar to order the notes by color. This option will order the notes depending on the color hex-value.
 
-![Order by color](./application/public/assets/gif/order-color.gif)
+![Order by color](./application/public/assets/order-color.png)
 
 
 #### **Reset order**
 
 The user can click the option `Reset order` from the menu on the sidebar to reset the notes order to default.
 
-![Reset order](./application/public/assets/gif/reset-order.gif)
+![Reset order](./application/public/assets/reset-order.png)
 
 
 #### **View notes and page**
@@ -112,7 +112,7 @@ or
 </svg>
 to move between pages.
 
-![View page](./application/public/assets/gif/view-page.gif)
+![View page](./application/public/assets/view-page.png)
 
 <br>
 
@@ -120,7 +120,7 @@ to move between pages.
 
 Within the application the user can click at any moment the `Theme` button from the navigation bar to change between dark and light mode.
 
-![Theme](./application/public/assets/gif/theme.gif)
+![Theme](./application/public/assets/theme.png)
 
 <br>
 
