@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcryptjs';
 import pkg from 'pg';
+import fs from 'fs';
+import path from 'path';
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -15,8 +17,12 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    ssl: { 
+        rejectUnauthorized: true,
+        ca: fs.readFileSync(path.resolve('certs', 'ca.pem')).toString(),
+    },
 });
-  
+
 export default pool;
 
 const app = express();
