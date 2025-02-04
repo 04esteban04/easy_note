@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0A3042;
+    color: white;
+
+    font-family: "Funnel Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+body.light-mode {
+    background-color: #ffffff;
+    color: #0A3042;
+}
+
+body.dark-mode {
+    background-color: #0A3042;
+    color: white;
+}
+
+.main-container {
+    max-width: 1900px;
+    width: 100%;
+}
+
+.image-overlay-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 0px 0px 20px 20px;
+    margin: auto;
+    box-shadow: 0 10px 10px -2px rgba(0, 0, 0, 0.5);
+}
+  
+.notes-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    filter: blur(8px);
+    z-index: 1; 
+}
+
+.welcome-section {
+    text-align: center;
+    position: relative;
+    z-index: 2; 
+    width: 100%;
+    height: 400px;
+    padding: 2rem; 
+    background-color: rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 4px black;
+    color: white;
+}
+
+.welcome-section h1 {
+    font-size: calc(1.5rem + 1vw); 
+    margin: 0.5rem 0;
+}
+
+.welcome-section p {
+    font-size: calc(1rem + 0.5vw); 
+    margin: 0;
+}
+
+.features-section {
+    max-width: 1900px;
+    width: 100%;
+    height: 400px;
+}
+
+.features-grid {
+    max-width: 1900px;
+    width: 90%;
+}
+
+.feature-item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: justify;
+    min-width: 200px;
+    max-width: 550px;
+    width: 100%;
+    min-height: 150px;
+    padding: 20px;
+    border-radius: 50px;
+}
+
+.login-section {
+    max-width: 1900px;
+    width: 90%;
+    margin: auto;
+    height: 200px;
+}
+
+.main-light-mode {
+    box-shadow: 0 0px 20px 0px #0A3042;
+}
+
+.main-dark-mode {
+    box-shadow: 0 0px 10px 0px #f9f9f9;
+}
+
+@media (max-width: 1200px) {
+
+    .feature-item div{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+}
+
+@media (max-width: 575px) {
+
+    .welcome-section {
+        height: 200px;
+        padding: 0px 20px;
+    }
+
+    .features-section {
+        height: fit-content;
+        margin-top: 40px;
+        padding: 0px 40px;
+    }
+
+    .features-grid {
+        flex-direction: column;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        width: 100%;
+        min-height: fit-content;
+        margin: 10px 0px;
+    }
+
+    .login-section {
+        text-align: center; 
+        margin-top: 30px; 
+    }
+
+}
