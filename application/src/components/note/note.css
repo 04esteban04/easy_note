@@ -21,3 +21,17 @@
 .badge {
     font-size: 0.8rem;
 }
+
+.svg-size{
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 575px) {
+    .svg-size{
+        width: 20px;
+        height: 20px;
+        margin: 0px 10px;
+    }
+    
+}

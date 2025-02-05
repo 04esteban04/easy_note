@@ -44,3 +44,9 @@
     color: #ffdd57;
     fill: #ffdd57; 
 }
+
+@media (max-width: 575px) {
+    .navbar-links {
+        gap: 1.5rem;
+    }
+}

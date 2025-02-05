@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Popup } from '../';
 import "./navbar.css"
 
-function NavbarLink ({ condition, path, svg, text, toggleTheme, setPopupMessage }) {
+function NavbarLink (props) {
 
     const navigate = useNavigate();
 
-    const handleLogout = async (event) => {
+    const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
 
-        event.preventDefault();
+    const handleLogout = async () => {
 
+        if (props.isSubmitting) {
+            return;
+        } 
+        
         try {
+            props.setIsSubmitting(true);
+
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/auth/logout`, {
                 method: 'POST',
                 credentials: 'include',
@@ -24,36 +31,63 @@ function NavbarLink ({ condition, path, svg, text, toggleTheme, setPopupMessage 
                 localStorage.removeItem("savedPage");
                 navigate('/login');
             } else {
-                setPopupMessage(data.message || 'Failed to logout');
+                props.setPopupMessage(data.message || 'Failed to logout');
             }
             
         } 
         
         catch (error) {
             console.error('Logout error:', error);
-            setPopupMessage('An error occurred during logout');
+            props.setPopupMessage('An error occurred during logout');
         }
+
+        finally {
+            props.setIsSubmitting(false);
+        }
+    };
+
+    const handleLogoutConfirmation = () => {
+
+        setIsLogoutPopupOpen(true);
 
     };
 
-    if (!condition) {
+    const handleLogoutPopupClose = () => {
+
+        setIsLogoutPopupOpen(false);
+
+    };
+
+    if (!props.condition) {
         return null;
     }
     
     return (
-        <Link 
-            className="link d-flex justify-content-center align-items-center" 
-            to={path}
-            onClick={(e) => {
-                if (path === "#logout"){
-                    handleLogout(e);
-                } else if (path === "#theme"){
-                    toggleTheme();
-                }
-            }}>
-            {svg}
-            <span className="d-none d-sm-inline">{text}</span>
-        </Link>
+        <>
+            <Link 
+                className="link d-flex justify-content-center align-items-center" 
+                to={props.path}
+                onClick={() => {
+                    if (props.path === "#logout"){
+                        handleLogoutConfirmation();
+                    } else if (props.path === "#theme"){
+                        props.toggleTheme();
+                    }
+                }}>
+                {props.svg}
+                <span className="d-none d-sm-inline">{props.text}</span>
+            </Link>
+
+            
+            {isLogoutPopupOpen && (
+                <Popup 
+                    logoutPopup={isLogoutPopupOpen}
+                    isSubmitting={props.isSubmitting}
+                    handleLogoutConfirmation={handleLogout}
+                    handleLogoutPopupClose={handleLogoutPopupClose}
+                />
+            )}
+        </>
     );
 };
 

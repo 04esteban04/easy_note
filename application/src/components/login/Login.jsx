@@ -151,7 +151,7 @@ function Login() {
                         </div>
 
                         <p className="text-center mt-4">
-                            Don't have an account? <Link id='create-account' to="/register">Create one here</Link>
+                            Don't have an account? <Link id='create-account' to="/register">Create one</Link>
                         </p>
 
                     </form>
