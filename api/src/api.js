@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import bcrypt from 'bcryptjs';
 import pkg from 'pg';
 import fs from 'fs';
-import path from 'path';
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -19,7 +18,7 @@ const pool = new Pool({
     port: process.env.DB_PORT,
     ssl: { 
         rejectUnauthorized: true,
-        ca: fs.readFileSync(path.resolve('certs', 'ca.pem')).toString(),
+        ca: fs.readFileSync('/etc/secrets/ca.pem').toString(),
     },
 });
 
@@ -102,8 +101,8 @@ app.post('/api/login', async (req, res) => {
 
                 res.cookie('userId', token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: 'lax',
+                    secure: true,
+                    sameSite: 'none',
                     maxAge: 3600000,
                 });
 
@@ -161,8 +160,8 @@ app.post('/api/logout', authenticateToken, (req, res) => {
 
     res.clearCookie('userId', {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
     });
 
     res.status(200).json({ success: true, message: 'User logged out successfuly'});
