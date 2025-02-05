@@ -5,7 +5,9 @@ EasyNote offers a clean and intuitive UI, making it simple for users to create, 
 
 ![Main page](./application/public/assets/main.png)
 
-> **Note:** *This project is being hosted at: ---*
+<br>
+
+> **Note:** *This project is being hosted at: [https://easy-note-yf23.onrender.com](https://easy-note-yf23.onrender.com)*
 
 <br>
 
