@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import bcrypt from 'bcryptjs';
 import pkg from 'pg';
+import fs from 'fs';
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -15,8 +16,12 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
+    ssl: { 
+        rejectUnauthorized: true,
+        ca: fs.readFileSync('/etc/secrets/ca.pem').toString(),
+    },
 });
-  
+
 export default pool;
 
 const app = express();
@@ -96,8 +101,8 @@ app.post('/api/login', async (req, res) => {
 
                 res.cookie('userId', token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: 'lax',
+                    secure: true,
+                    sameSite: 'none',
                     maxAge: 3600000,
                 });
 
@@ -155,8 +160,8 @@ app.post('/api/logout', authenticateToken, (req, res) => {
 
     res.clearCookie('userId', {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
     });
 
     res.status(200).json({ success: true, message: 'User logged out successfuly'});
