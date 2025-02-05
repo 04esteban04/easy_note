@@ -29,6 +29,8 @@ function Home () {
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [noteToDelete, setNoteToDelete] = useState(null);
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     useEffect(() => {
 
         async function checkSession() {
@@ -120,7 +122,13 @@ function Home () {
 
     const handleNewNoteSubmit = async () => {   
         
+        if (isSubmitting) {
+            return;
+        } 
+        
         try {
+            setIsSubmitting(true);
+
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/createNote`, {
                 method: 'POST',
                 headers: {
@@ -151,6 +159,10 @@ function Home () {
         catch (error) {
           console.error('Error creating note:', error);
           setPopupMessage('An error occurred while creating the note.');
+        }
+
+        finally {
+            setIsSubmitting(false);
         }
     
     };
@@ -189,7 +201,13 @@ function Home () {
 
     const handleEditSubmit = async () => {
         
+        if (isSubmitting) {
+            return;
+        } 
+
         try {
+            setIsSubmitting(true);
+
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/updateNote`, {
                 method: 'PUT',
                 headers: {
@@ -226,6 +244,11 @@ function Home () {
             setPopupMessage('An error occurred while updating the note.');
         }
 
+        finally {
+            setIsSubmitting(false);
+        }
+
+
     };
 
     const handleEditPopupClose = () => {
@@ -241,9 +264,11 @@ function Home () {
 
     const handleDelete = async () => {
 
-        if (!noteToDelete) return;
-
+        if (!noteToDelete || isSubmitting) return;
+        
         try {
+            setIsSubmitting(true);
+
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/deleteNote`, {
                 method: 'DELETE',
                 headers: {
@@ -277,6 +302,7 @@ function Home () {
         finally {
             setIsDeletePopupOpen(false);
             setNoteToDelete(null);
+            setIsSubmitting(false);
         }
 
     };
@@ -395,7 +421,13 @@ function Home () {
                 
                 <div className="main-home-container">
 
-                    <Navbar themeCondition={true} setTheme={setTheme} logout={true} />
+                    <Navbar 
+                        themeCondition={true} 
+                        setTheme={setTheme} 
+                        logout={true} 
+                        isSubmitting={isSubmitting}
+                        setIsSubmitting={setIsSubmitting}
+                    />
 
                     <div className="container home-container">
                     
@@ -411,7 +443,7 @@ function Home () {
                         />
 
                         <NotesGrid 
-                            notes={getFilteredNotes()} 
+                            notes={getFilteredNotes()}
                             handleEdit={handleEdit} 
                             handleDeleteConfirmation={handleDeleteConfirmation}
                         />    
@@ -432,6 +464,7 @@ function Home () {
                         <Popup 
                             newNotePopup={isNewNotePopupOpen}
                             newNoteData={newNoteData}
+                            isSubmitting={isSubmitting}
                             handleNewNoteChange={handleNewNoteChange}
                             handleColorChange={handleColorChange}
                             handleNewNoteSubmit={handleNewNoteSubmit}
@@ -443,6 +476,7 @@ function Home () {
                         <Popup 
                             editPopup={isEditPopupOpen} 
                             editNoteData={editNoteData}
+                            isSubmitting={isSubmitting}
                             handleEditChange={handleEditChange}
                             handleColorChange={handleColorChange}
                             handleEditSubmit={handleEditSubmit}
@@ -454,6 +488,7 @@ function Home () {
                         <Popup 
                             deletePopup={isDeletePopupOpen}
                             noteToDelete={noteToDelete}
+                            isSubmitting={isSubmitting}
                             handleDeleteConfirmation={handleDelete}
                             handleDeletePopupClose={handleDeletePopupClose}
                         />
